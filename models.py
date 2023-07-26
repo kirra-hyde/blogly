@@ -1,5 +1,16 @@
 """Models for Blogly."""
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
+def connect_db(app):
+    """Connect to database."""
+
+    app.app_context().push()
+    db.app = app
+    db.init_app(app)
+
+
+# u = User(first_name="Kirra", last_name="Hyde")
 class User(db.Model):
 
     __tablename__="users"
@@ -21,5 +32,5 @@ class User(db.Model):
     )
 
     image_url = db.Column(
-        db.string(300)
+        db.String(300)
     )
