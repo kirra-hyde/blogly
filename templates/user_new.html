@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}New User From{% endblock %}
+
+{% block content %}
+
+<form id="userform" method="post">
+
+  <div>
+    <label for="firstname"> First Name</label>
+    <input type="text" id="firstname" name="firstname" placeholder="Enter a first name" required>
+  </div>
+  <div>
+    <label for="lastname"> Last Name</label>
+    <input type="text" id="lastname" name="lastname" placeholder="Enter a last name" required>
+  </div>
+  <div>
+    <label for="imageurl"> Image URL</label>
+    <input type="text" id="imageurl" name="imageurl" placeholder="Provide an image of this user" required>
+  </div>
+
+
+</form>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
