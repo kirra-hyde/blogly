@@ -76,3 +76,9 @@ def edit_profile(user_id):
 
     return redirect("/users")
 
+@app.post("/users/<int:user_id>/delete")
+def delete_user(user_id):
+    user = User.query.filter(User.id == user_id).delete()
+
+    db.session.commit()
+    return redirect("/users")
