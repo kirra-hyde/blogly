@@ -37,7 +37,7 @@ def user_form():
 def add_user():
     firstname = request.form["firstname"]
     lastname = request.form["lastname"]
-    image = request.form.get("imageurl")
+    image = request.form.get("imageurl")  #TODO: Find another way to make this none if no user entry and make image image_url
 
     user = User(first_name=firstname, last_name=lastname, image_url=image)
     db.session.add(user)
@@ -67,7 +67,7 @@ def edit_profile(user_id):
     lastname = request.form["lastname"]
     image = request.form.get("imageurl")
 
-    user = User.query.filter(User.id == user_id).first()
+    user = User.query.filter(User.id == user_id).first()  #TODO: add or 404
     user.first_name = firstname
     user.last_name = lastname
     user.image_url = image
@@ -78,7 +78,7 @@ def edit_profile(user_id):
 
 @app.post("/users/<int:user_id>/delete")
 def delete_user(user_id):
-    user = User.query.filter(User.id == user_id).delete()
+    user = User.query.filter(User.id == user_id).delete()  #TODO: add or 404
 
     db.session.commit()
     return redirect("/users")

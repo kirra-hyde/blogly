@@ -9,6 +9,7 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
 
+DEFAULT_IMAGE_URL = "https://tinyurl.com/defaultprofile12344645"
 
 # u = User(first_name="Kirra", last_name="Hyde")
 class User(db.Model):
@@ -32,5 +33,7 @@ class User(db.Model):
     )
 
     image_url = db.Column(
-        db.String(300)
+        db.String(300),  #TODO: change to text
+        nullable=True,
+        default=DEFAULT_IMAGE_URL  #TODO: Don't have this with nullable = True
     )

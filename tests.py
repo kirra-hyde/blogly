@@ -58,9 +58,29 @@ class UserViewTestCase(TestCase):
             resp = c.get("/users")
             self.assertEqual(resp.status_code, 200)
             html = resp.get_data(as_text=True)
-            self.assertIn("test1_first", html)
-            self.assertIn("test1_last", html)
+            self.assertIn("Users", html)
+            self.assertIn("Add User", html)
 
+    def test_create_user_form(self):
+        with self.client as c:
+            resp = c.get("/users/new")
+            self.assertEqual(resp.status_code, 200)
+            html = resp.get_data(as_text=True)
+            self.assertIn("Create a User", html)
 
+    def test_user_details(self):
+        with self.client as c:
+            resp = c.get(f"/users/{self.user_id}")
+            self.assertEqual(resp.status_code, 200)
+            html = resp.get_data(as_text=True)
+            self.assertIn("Edit", html)
+            self.assertIn("Delete", html)          #TODO: Look for user unique stufflike name
 
-    
+    def test_edit_user_form(self):
+        with self.client as c:
+            resp = c.get(f"/users/{self.user_id}/edit")
+            self.assertEqual(resp.status_code, 200)
+            html = resp.get_data(as_text=True)
+            self.assertIn("Edit a User", html)    #TODO: Look for user unique stuff
+
+    #TODO: Test for 404
