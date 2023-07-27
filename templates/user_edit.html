@@ -19,9 +19,11 @@
     <label for="imageurl"> Image URL</label>
     <input type="text" id="imageurl" name="imageurl" placeholder="Provide an image of this user" required>
   </div>
-<button id="cancelbtn" action="/user/[userid****]"> Cancel</button>
+<!-- <button id="cancelbtn" action="/user/[userid****]"> Cancel</button> -->
 <button id="savebtn" method="post"> Save </button>
 
+<form action="/users/{{user.id}}" method="get">
+<button>cancel</button>
 </form>
 
 

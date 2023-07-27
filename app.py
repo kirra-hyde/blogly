@@ -52,8 +52,8 @@ def show_individual_user(user_id):
     return render_template("user_details.html", user=user)
 
 
-app.get("/users/<int:user_id>/edit")
+@app.get("/users/<int:user_id>/edit")
 def show_edit_page(user_id):
-
-    return render_template("user_edit.html")
+    user = User.query.get_or_404(user_id)
+    return render_template("user_edit.html",user=user)
 
