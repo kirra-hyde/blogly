@@ -4,11 +4,14 @@
 
 {% block content %}
 
-
+<form action="/users/{{user.id}}/edit">
 <img src="{{imageurl}}" alt="">
-<h1> {{user.name}}</h1>
+<h1> {{user.first_name}} {{user.last_name}}</h1>
 
 <button id="editbtn" method="post">Edit</button>
+</form>
+
+
 <button id="deletebtn" method="post"> Delete</button>
 
 

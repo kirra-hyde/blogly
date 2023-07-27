@@ -13,7 +13,7 @@ def connect_db(app):
 # u = User(first_name="Kirra", last_name="Hyde")
 class User(db.Model):
 
-    __tablename__="users"
+    __tablename__= "users"
 
     id = db.Column(
         db.Integer,
