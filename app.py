@@ -54,6 +54,25 @@ def show_individual_user(user_id):
 
 @app.get("/users/<int:user_id>/edit")
 def show_edit_page(user_id):
+    """Show form to edit user info"""
     user = User.query.get_or_404(user_id)
     return render_template("user_edit.html",user=user)
+
+
+@app.post("/users/<int:user_id>/edit")
+def edit_profile(user_id):
+    """Update user info"""
+
+    firstname = request.form["firstname"]
+    lastname = request.form["lastname"]
+    image = request.form.get("imageurl")
+
+    user = User.query.filter(User.id == user_id).first()
+    user.first_name = firstname
+    user.last_name = lastname
+    user.image_url = image
+
+    db.session.commit()
+
+    return redirect("/users")
 

@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1> Create a User</h1>
-<form id="userform" method="post">
+<form id="userform" method="post" action = "/users/new">
 
   <div>
     <label for="firstname"> First Name</label>
@@ -16,7 +16,7 @@
   </div>
   <div>
     <label for="imageurl"> Image URL</label>
-    <input type="text" id="imageurl" name="imageurl" placeholder="Provide an image of this user" required>
+    <input type="text" id="imageurl" name="imageurl" placeholder="Provide an image of this user">
   </div>
 <button>Add</button>
 

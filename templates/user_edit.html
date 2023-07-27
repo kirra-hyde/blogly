@@ -5,7 +5,7 @@
 {% block content %}
 
 <h1> Edit a User</h1>
-<form id="edituserform" method="post">
+<form id="edituserform" method="post" action="/users/{{user.id}}/edit">
 
   <div>
     <label for="firstname"> First Name</label>
@@ -17,10 +17,11 @@
   </div>
   <div>
     <label for="imageurl"> Image URL</label>
-    <input type="text" id="imageurl" name="imageurl" placeholder="Provide an image of this user" required>
+    <input type="text" id="imageurl" name="imageurl" placeholder="Provide an image of this user">
   </div>
 <!-- <button id="cancelbtn" action="/user/[userid****]"> Cancel</button> -->
 <button id="savebtn" method="post"> Save </button>
+</form>
 
 <form action="/users/{{user.id}}" method="get">
 <button>cancel</button>
