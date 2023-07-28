@@ -37,3 +37,35 @@ class User(db.Model):
         nullable=True,
         default=DEFAULT_IMAGE_URL  #TODO: Don't have this with nullable = True
     )
+
+
+class Post(db.Model):
+
+    __tablename__= "posts"
+
+    id= db.Column(
+        db.Integer,
+        primary_key= True,
+        autoincrement = True
+    )
+
+    title = db.Column(
+        db.String(50),
+        nullable = False
+    )
+
+    content = db.Column(
+        db.Text(),
+        nullable = False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        nullable = False,
+        default = db.func.now()
+    )
+
+    user = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id')
+    )

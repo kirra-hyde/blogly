@@ -4,8 +4,7 @@
 import os
 
 from flask import Flask, render_template, request, redirect
-from models import connect_db, User, db
-
+from models import connect_db, User, db, Post
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     "DATABASE_URL", 'postgresql:///blogly')
@@ -49,6 +48,7 @@ def add_user():
 def show_individual_user(user_id):
     """Show info of user on a single post"""
     user = User.query.get_or_404(user_id)
+    # post = Post.query.filter(Post.user ==  user_id).all()
     return render_template("user_details.html", user=user)
 
 
@@ -82,3 +82,21 @@ def delete_user(user_id):
 
     db.session.commit()
     return redirect("/users")
+
+
+
+@app.get("/users/<int:user_id>/posts/new")
+def show_post_form(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template("post_new_form.html", user=user)
+
+@app.post("/users/<int:user_id>/posts/new")
+def submit_post_form(user_id):
+    user = User.query.get_or_404(user_id)
+    title = request.form["title"]
+    content = request.form["content"]
+    post = Post(title = title , content = content, user=user_id)
+
+    db.session.add(post)
+    db.session.commit()
+    return redirect("/users/{user_id}")
