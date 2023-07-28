@@ -48,8 +48,8 @@ def add_user():
 def show_individual_user(user_id):
     """Show info of user on a single post"""
     user = User.query.get_or_404(user_id)
-    # post = Post.query.filter(Post.user ==  user_id).all()
-    return render_template("user_details.html", user=user)
+    posts = Post.query.filter(Post.user == user_id).all()
+    return render_template("user_details.html", user=user, posts=posts)
 
 
 @app.get("/users/<int:user_id>/edit")
@@ -87,16 +87,32 @@ def delete_user(user_id):
 
 @app.get("/users/<int:user_id>/posts/new")
 def show_post_form(user_id):
+    """Shows new post form"""
+
     user = User.query.get_or_404(user_id)
     return render_template("post_new_form.html", user=user)
 
+
 @app.post("/users/<int:user_id>/posts/new")
 def submit_post_form(user_id):
-    user = User.query.get_or_404(user_id)
+    """Add a new post"""
+
     title = request.form["title"]
     content = request.form["content"]
-    post = Post(title = title , content = content, user=user_id)
+    post = Post(title = title, content = content, user = user_id)
 
     db.session.add(post)
     db.session.commit()
-    return redirect("/users/{user_id}")
+    return redirect(f"/users/{user_id}")
+
+
+@app.get("/posts/<int:post_id>")
+def show_post(post_id):
+    """Show post id"""
+
+    post = Post.query.get_or_404(post_id)
+    user = post.user
+
+    return render_template("post_details.html", post=post, user=user)
+
+

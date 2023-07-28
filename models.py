@@ -11,7 +11,7 @@ def connect_db(app):
 
 DEFAULT_IMAGE_URL = "https://tinyurl.com/defaultprofile12344645"
 
-# u = User(first_name="Kirra", last_name="Hyde")
+
 class User(db.Model):
 
     __tablename__= "users"
@@ -69,3 +69,5 @@ class Post(db.Model):
         db.Integer,
         db.ForeignKey('users.id')
     )
+
+    user = db.relationship('User', backref = 'posts')

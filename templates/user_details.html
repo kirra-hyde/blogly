@@ -16,7 +16,11 @@
 </form>
 
 <h2>Posts</h2>
-<ul></ul>
+<ul>
+  {% for post in posts%}
+  <li><a>{{post.title}}</a></li>
+  {% endfor %}
+</ul>
 
 <form action="/users/{{user.id}}/posts/new" method="get">
   <button>Add Post</button>
